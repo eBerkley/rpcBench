@@ -22,7 +22,7 @@ func RunSubBenchmarks(name string, b *testing.B, bnch Benchable, ctx context.Con
 			}
 		}
 	})
-	b.Run("Geo Nearby Parallel", func(b *testing.B) {
+	b.Run(name+" Parallel", func(b *testing.B) {
 		b.RunParallel(func(pb *testing.PB) {
 			for pb.Next() {
 				err := bnch(ctx, s)

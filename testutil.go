@@ -26,7 +26,7 @@ func formatOutput(r rune) rune {
 
 func WriteTestResults(service string, input string, output string) {
 
-	output_csv, err := os.OpenFile(*Output, os.O_WRONLY|os.O_CREATE, 0666)
+	output_csv, err := os.OpenFile(*Output, os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0666)
 
 	if err != nil {
 		fmt.Printf("%f\n", err)

@@ -1,4 +1,4 @@
-package rpcutil
+package rpcBench
 
 import (
 	"flag"

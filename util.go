@@ -18,8 +18,14 @@ type Result interface {
 	Get() string
 }
 
-func NewRequest[T Request]() T {
-	var t T
+type Ptr[T Request] interface {
+	*T
+	Make()
+}
+
+func NewRequest[T Ptr[R], R Request]() T {
+	var r R
+	t := T(&r)
 	t.Make()
 	return t
 }

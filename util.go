@@ -48,10 +48,9 @@ func (rpc RPCFunc) Bench(ctx context.Context, s Server, b *testing.B, benchName 
 		name := benchName + " Concurrent"
 		b.Run(name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-
-				reg := trace.StartRegion(ctx, name)
+				ctx, task := trace.NewTask(ctx, name)
 				_, _, err := rpc(ctx, s)
-				reg.End()
+				task.End()
 
 				if err != nil {
 					b.Error(err.Error())
@@ -63,9 +62,9 @@ func (rpc RPCFunc) Bench(ctx context.Context, s Server, b *testing.B, benchName 
 			b.RunParallel(func(pb *testing.PB) {
 				for pb.Next() {
 
-					reg := trace.StartRegion(ctx, name)
+					ctx, task := trace.NewTask(ctx, name)
 					_, _, err := rpc(ctx, s)
-					reg.End()
+					task.End()
 
 					if err != nil {
 						b.Error(err.Error())

@@ -46,7 +46,11 @@ func (rs *RandSeed) GetNext() (float32, bool) {
 	// return rs.seed.Float32(), true
 }
 
-var r = NewRandSeed(BUF_SIZE)
+var r *RandSeed
+
+func SetR() {
+	r = NewRandSeed(BUF_SIZE)
+}
 
 func Random(f float32) float32 {
 	c, _ := r.GetNext()

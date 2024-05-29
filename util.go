@@ -49,7 +49,9 @@ func (rpc RPCFunc) Bench(ctx context.Context, s Server, b *testing.B, benchName 
 		b.Run(name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				ctx, task := trace.NewTask(ctx, name)
+				trace.Log(ctx, name, name+" Begin")
 				_, _, err := rpc(ctx, s)
+				trace.Log(ctx, name, name+" End")
 				task.End()
 
 				if err != nil {
@@ -63,7 +65,9 @@ func (rpc RPCFunc) Bench(ctx context.Context, s Server, b *testing.B, benchName 
 				for pb.Next() {
 
 					ctx, task := trace.NewTask(ctx, name)
+					trace.Log(ctx, name, name+" Begin")
 					_, _, err := rpc(ctx, s)
+					trace.Log(ctx, name, name+" End")
 					task.End()
 
 					if err != nil {
